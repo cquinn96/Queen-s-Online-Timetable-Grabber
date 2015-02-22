@@ -24,4 +24,7 @@ curl -X POST https://accounts.google.com/o/oauth2/token \
 
 access_token=`python extract_access_token.py`
 
-echo $access_token
+curl -H "Authorization: Bearer $access_token" https://www.googleapis.com/calendar/v3/users/me/calendarList
+
+rm access_token.txt
+rm timetable.json
