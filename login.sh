@@ -20,5 +20,8 @@ curl -X POST https://accounts.google.com/o/oauth2/token \
     -d "client_id=574687958685-qh4ilk1uq1f80jc5qsoavsv3ccq64df8.apps.googleusercontent.com" \
     -d "client_secret=AXdvd3szV01ohOemWkdGxaVp" \
     -d "redirect_uri=urn:ietf:wg:oauth:2.0:oob" \
-    -d "grant_type=authorization_code"
+    -d "grant_type=authorization_code" -o access_token.txt
 
+access_token=`python extract_access_token.py`
+
+echo $access_token
