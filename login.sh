@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #!/bin/bash
 
-username=ads/
-password=
+username=ads/40137949
+password=43JOKY5N17
 
 echo $username
 echo $password
@@ -42,7 +42,17 @@ curl -X POST https://accounts.google.com/o/oauth2/token \
 
 access_token=`python extract_access_token.py`
 
-curl -H "Authorization: Bearer $access_token" https://www.googleapis.com/calendar/v3/users/me/calendarList
+curl -H "Authorization: Bearer $access_token" https://www.googleapis.com/calendar/v3/users/me/calendarList > calendar_list.json
 
-rm access_token.txt
-rm timetable.json
+python choose_calendar.py
+
+chosen_cal_id=`cat chosen_calendar_id.txt`
+echo "chosen calendar id is $chosen_cal_id"
+
+# now add calendar events one by one
+
+python parse_json.py | xargs -L 1 -I %json% curl -X POST \
+    -H "Authorization: Bearer $access_token" \
+    -H "Content-Type: application/json" \
+    -d '%json%' \
+    https://www.googleapis.com/calendar/v3/calendars/$chosen_cal_id/events

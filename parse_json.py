@@ -59,6 +59,5 @@ for day in days:
 
             json_dat = json.JSONEncoder().encode(dat)
             pp.pprint(json_dat)
-            print('\n')
 
 json_data.close()
