@@ -52,9 +52,9 @@ for day in days:
             dat['start']['dateTime'] = convert_date(todays_date, activity['StartTime'])
             dat['start']['timeZone'] = "Europe/London"
 
-            dat['stop'] = dict()
-            dat['stop']['dateTime'] = convert_date(todays_date, activity['EndTime'])
-            dat['stop']['timeZone'] = "Europe/London"
+            dat['end'] = dict()
+            dat['end']['dateTime'] = convert_date(todays_date, activity['EndTime'])
+            dat['end']['timeZone'] = "Europe/London"
             data_list.append(dat)
 
             json_dat = json.JSONEncoder().encode(dat)
